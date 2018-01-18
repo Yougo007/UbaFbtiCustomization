@@ -7,7 +7,7 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		Validator data = new Validator();
 		//System.out.println(data.getCbnLimit("cAAA"));
-		double InvoiceAmt = data.getInvoiceNumber("ABD0010114").getInvoiceAmt();
+		/*double InvoiceAmt = data.getInvoiceNumber("ABD0010114").getInvoiceAmt();
 		double AmtUnutil = data.getInvoiceNumber("ABD0010114").getAmtUnutil();
 		
 		double avalInvoiceAmt = InvoiceAmt - AmtUnutil;
@@ -17,9 +17,9 @@ public class Test {
 		System.out.println(data.getInvoiceNumber("ABD0010114").getInvoiceAmt());
 		System.out.println(data.getInvoiceNumber("ABD0010114").getAmtUnutil());
 		System.out.println(data.getInvoiceNumber("ABD0010114").gettransDate());
-		
-		System.out.println(avalInvoiceAmt);
-		//System.out.println(AmtUnutil);
+	*/	
+		String test = "AB00124BC";
+		System.out.println(data.UpdateCleanPaymentInvoice(3000, test));
 	
 	    
 	}

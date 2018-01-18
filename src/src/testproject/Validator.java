@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
-
 public class Validator {
 	
 	public Validator() {}
@@ -184,54 +182,43 @@ public class Validator {
 		return refnum;
 	}
 	
+	//Gets the Clean Payment invoice passed by FBTI
 	public CleanPayment getInvoiceNumber(String InvoiceNumber) throws SQLException {
 		conn = connector.getDatabaseConnection();
 		//fetches the last inserted reference
-		String query = "SELECT SUBPROD_ID, INVOICE_ID,INVOICE_AMT,AMT_UNUTIL,TRANS_DATE FROM TBL_CLEANPAYTRANS WHERE INVOICE_ID = ?";
+		String query = "SELECT SUBPROD_ID, INVOICE_ID,INVOICE_AMT,TRAN_AMT FROM TBL_CLEANPAYTRANS WHERE INVOICE_ID = ?";
 		preparedStatement = conn.prepareStatement(query);
 		preparedStatement.setString(1, InvoiceNumber);
 		ResultSet rs = preparedStatement.executeQuery();
-		if (!rs.next())
+		if (rs.next())
 		{
-			//Call the InsertCleanPaymentInvoice
-			System.out.println("Calling new invoice insert");
-			String subProdId = "EDU"; 
-			String invoiceId = "ABD0010114"; 
-			double invoiceAmt= 356000;  
-			double amtUnUtil = 3000;
-			DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
-			LocalDateTime datenow = LocalDateTime.now();
-			String TransDate = dateformat.format(datenow);
-			InsertCleanPaymentInvoice(subProdId,invoiceId,invoiceAmt, amtUnUtil,TransDate );
-		}
-		
-		else {			
 			CleanPayment cleanpay = new CleanPayment();
 			cleanpay.setsubproductid(rs.getString("SUBPROD_ID"));
 			cleanpay.setInvoiceId(rs.getString("INVOICE_ID"));
 			cleanpay.setInvoiceAmt(rs.getDouble("INVOICE_AMT"));
-			cleanpay.setAmtUnutil(rs.getDouble("AMT_UNUTIL"));
-			cleanpay.settransDate(rs.getDate("TRANS_DATE"));
+			cleanpay.setAmtUnutil(rs.getDouble("TRAN_AMT"));
 			
 			return cleanpay;
-		}
-		
+		}		
 		return null;
 	}
 	
-	public void InsertCleanPaymentInvoice(String subProdId, String invoiceId, double invoiceAmt, double amtUnUtil, String date) throws SQLException {
+	//Inserts new Invoice number and details
+	public void InsertCleanPaymentInvoice(String subProdId, String invoiceId, double invoiceAmt) throws SQLException {
 		conn = connector.getDatabaseConnection();
 		DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
 		LocalDateTime datenow = LocalDateTime.now();
 		String TransDate = dateformat.format(datenow);
+		String lastTranDate = TransDate;
 		String query = "INSERT INTO TBL_CLEANPAYTRANS VALUES (?, ?, ?, ?, ?)";
 		System.out.println("\nExecuting query: " + query);
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setString(1, subProdId);
 		ps.setString(2, invoiceId);
 		ps.setDouble(3, invoiceAmt);
-		ps.setDouble(4, amtUnUtil);
+		ps.setDouble(4, invoiceAmt);
 		ps.setString(5, TransDate);
+		ps.setString(6, lastTranDate);
 		int i = ps.executeUpdate();
 		
 		if(i ==1)
@@ -239,5 +226,29 @@ public class Validator {
 			System.out.println("Successfully inserted");
 		}		 
 		
+	}
+	
+	public boolean UpdateCleanPaymentInvoice(double tranAmt, String InvoiceNumber) throws SQLException {
+		conn = connector.getDatabaseConnection();
+		DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
+		LocalDateTime datenow = LocalDateTime.now();
+		String TransDate = dateformat.format(datenow);
+		String query = "UPDATE TBL_CLEANPAYTRANS SET TRAN_AMT = ?, LAST_TRAN_DATE =? WHERE INVOICE_ID = ?";
+		System.out.println("\nExecuting query: " + query);
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setDouble(1, tranAmt);
+		ps.setString(2, TransDate);
+		ps.setString(3, InvoiceNumber);
+
+		int i = ps.executeUpdate();
+		
+		if(i ==1)
+		{
+			System.out.println("Successfully Updated");
+			
+			return true;
+		}		 
+		
+		return false;
 	}
 }
