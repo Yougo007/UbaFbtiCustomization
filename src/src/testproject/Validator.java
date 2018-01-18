@@ -193,8 +193,16 @@ public class Validator {
 		ResultSet rs = preparedStatement.executeQuery();
 		if (!rs.next())
 		{
-			//Call the InsertCleanPaymentInvoice	
+			//Call the InsertCleanPaymentInvoice
 			System.out.println("Calling new invoice insert");
+			String subProdId = "FXI"; 
+			String invoiceId = "AB000123344"; 
+			double invoiceAmt= 356000;  
+			double amtUnUtil = 3000;
+			DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
+			LocalDateTime datenow = LocalDateTime.now();
+			String TransDate = dateformat.format(datenow);
+			InsertCleanPaymentInvoice(subProdId,invoiceId,invoiceAmt, amtUnUtil,TransDate );
 		}
 		
 		else {			
@@ -211,7 +219,7 @@ public class Validator {
 		return null;
 	}
 	
-	public boolean InsertCleanPaymentInvoice(String subProdId, String invoiceId, double invoiceAmt, double amtUnUtil) throws SQLException {
+	public void InsertCleanPaymentInvoice(String subProdId, String invoiceId, double invoiceAmt, double amtUnUtil, String date) throws SQLException {
 		conn = connector.getDatabaseConnection();
 		DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
 		LocalDateTime datenow = LocalDateTime.now();
@@ -222,15 +230,14 @@ public class Validator {
 		ps.setString(1, subProdId);
 		ps.setString(2, invoiceId);
 		ps.setDouble(3, invoiceAmt);
-		ps.setDouble(3, amtUnUtil);
-		ps.setString(5,TransDate);
+		ps.setDouble(4, amtUnUtil);
+		ps.setString(5, TransDate);
 		int i = ps.executeUpdate();
 		
 		if(i ==1)
 		{
-			return true;
+			System.out.println("Successfully inserted");
 		}		 
-		return false;
 		
 	}
 }
