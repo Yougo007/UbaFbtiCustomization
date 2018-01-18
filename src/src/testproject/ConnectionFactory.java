@@ -27,14 +27,6 @@ public class ConnectionFactory {
     String query;
     String sqlString;
    
-  /*  public Connection getDBConnection() throws SQLException{
-    	OracleDataSource ds;
-    	ds = new OracleDataSource();
-    	ds.setURL(DB_URL);
-    	conn = ds.getConnection(USER,PASS);  	
-    	
-    	return conn;
-    } */
     
     public Connection getDatabaseConnection() throws SQLException {
         try {
