@@ -6,16 +6,16 @@ public class CleanPayment {
 	 	private String subproductid;
 	    private String invoiceId;
 	    private double InvoiceAmt;
-	    private double AmtUnutil;
+	    private double TranAmt;
 	    private Date transDate;
 	    
 	    public CleanPayment() {}
 	    
-	    public CleanPayment(String subproductid,String invoiceId, double InvoiceAmt, double AmtUnutil, Date transDate) {
+	    public CleanPayment(String subproductid,String invoiceId, double InvoiceAmt, double TranAmt, Date transDate) {
 	        this.subproductid = subproductid;
 	        this.invoiceId = invoiceId;
 	        this.InvoiceAmt = InvoiceAmt;
-	        this.AmtUnutil = AmtUnutil;
+	        this.TranAmt = TranAmt;
 	        this.transDate = transDate;
 	    }
 	    
@@ -37,11 +37,11 @@ public class CleanPayment {
 	    public void setInvoiceAmt(double InvoiceAmt) {
 	        this.InvoiceAmt = InvoiceAmt;
 	    }
-	    public double getAmtUnutil() {
-	        return AmtUnutil;
+	    public double getTranAmt() {
+	        return TranAmt;
 	    }
-	    public void setAmtUnutil(double AmtUnutil) {
-	        this.AmtUnutil = AmtUnutil;
+	    public void setTranAmt(double TranAmt) {
+	        this.TranAmt = TranAmt;
 	    }
 	    
 	    public Date gettransDate() {

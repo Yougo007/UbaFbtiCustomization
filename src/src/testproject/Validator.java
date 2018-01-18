@@ -36,6 +36,10 @@ public class Validator {
 			gCoode1 = rs.getNString("CODE");
 			System.out.println(gCoode1);
 		}
+		
+		rs.close();
+		conn.close();
+		
 		return null;
 	}	
 	
@@ -86,6 +90,9 @@ public class Validator {
 				}		 
 			}									
 		}
+		
+		rs.close();
+		conn.close();
 				
 		return nextref;
 	}
@@ -106,6 +113,10 @@ public class Validator {
 		{
 			refnum = rs.getNString("REF_NUM");
 		}
+		
+		rs.close();
+		conn.close();
+		
 		return refnum;
 	}
 	
@@ -179,7 +190,13 @@ public class Validator {
 			refnum = rs.getNString("CODE");
 			System.out.println(refnum);
 		}
+		
+		rs.close();
+		conn.close();
+		
 		return refnum;
+		
+	
 	}
 	
 	//Gets the Clean Payment invoice passed by FBTI
@@ -196,10 +213,15 @@ public class Validator {
 			cleanpay.setsubproductid(rs.getString("SUBPROD_ID"));
 			cleanpay.setInvoiceId(rs.getString("INVOICE_ID"));
 			cleanpay.setInvoiceAmt(rs.getDouble("INVOICE_AMT"));
-			cleanpay.setAmtUnutil(rs.getDouble("TRAN_AMT"));
+			cleanpay.setTranAmt(rs.getDouble("TRAN_AMT"));
 			
 			return cleanpay;
-		}		
+		}	
+		
+		rs.close();
+		
+		conn.close();
+		
 		return null;
 	}
 	
@@ -226,6 +248,9 @@ public class Validator {
 			System.out.println("Successfully inserted");
 		}		 
 		
+		ps.close();
+		
+		conn.close();
 	}
 	
 	public boolean UpdateCleanPaymentInvoice(double tranAmt, String InvoiceNumber) throws SQLException {
@@ -247,7 +272,11 @@ public class Validator {
 			System.out.println("Successfully Updated");
 			
 			return true;
-		}		 
+		}	
+		
+		ps.close();
+		
+		conn.close();
 		
 		return false;
 	}
