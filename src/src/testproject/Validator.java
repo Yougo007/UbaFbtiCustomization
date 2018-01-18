@@ -184,19 +184,19 @@ public class Validator {
 		return refnum;
 	}
 	
-	public CleanPayment getInvoiceNumber(String subProdID) throws SQLException {
+	public CleanPayment getInvoiceNumber(String InvoiceNumber) throws SQLException {
 		conn = connector.getDatabaseConnection();
 		//fetches the last inserted reference
-		String query = "SELECT SUBPROD_ID, INVOICE_ID,INVOICE_AMT,AMT_UNUTIL,TRANS_DATE FROM TBL_CLEANPAYTRANS WHERE SUBPROD_ID = ?";
+		String query = "SELECT SUBPROD_ID, INVOICE_ID,INVOICE_AMT,AMT_UNUTIL,TRANS_DATE FROM TBL_CLEANPAYTRANS WHERE INVOICE_ID = ?";
 		preparedStatement = conn.prepareStatement(query);
-		preparedStatement.setString(1, subProdID);
+		preparedStatement.setString(1, InvoiceNumber);
 		ResultSet rs = preparedStatement.executeQuery();
 		if (!rs.next())
 		{
 			//Call the InsertCleanPaymentInvoice
 			System.out.println("Calling new invoice insert");
-			String subProdId = "FXI"; 
-			String invoiceId = "AB000123344"; 
+			String subProdId = "EDU"; 
+			String invoiceId = "ABD0010114"; 
 			double invoiceAmt= 356000;  
 			double amtUnUtil = 3000;
 			DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");

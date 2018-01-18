@@ -7,16 +7,16 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		Validator data = new Validator();
 		//System.out.println(data.getCbnLimit("cAAA"));
-		double InvoiceAmt = data.getInvoiceNumber("FXD").getInvoiceAmt();
-		double AmtUnutil = data.getInvoiceNumber("FXD").getAmtUnutil();
+		double InvoiceAmt = data.getInvoiceNumber("ABD0010114").getInvoiceAmt();
+		double AmtUnutil = data.getInvoiceNumber("ABD0010114").getAmtUnutil();
 		
 		double avalInvoiceAmt = InvoiceAmt - AmtUnutil;
 		
-		System.out.println(data.getInvoiceNumber("FXD").getId());
-		System.out.println(data.getInvoiceNumber("FXD").getInvoiceId());
-		System.out.println(data.getInvoiceNumber("FXD").getInvoiceAmt());
-		System.out.println(data.getInvoiceNumber("FXD").getAmtUnutil());
-		System.out.println(data.getInvoiceNumber("FXD").gettransDate());
+		System.out.println(data.getInvoiceNumber("ABD0010114").getId());
+		System.out.println(data.getInvoiceNumber("ABD0010114").getInvoiceId());
+		System.out.println(data.getInvoiceNumber("ABD0010114").getInvoiceAmt());
+		System.out.println(data.getInvoiceNumber("ABD0010114").getAmtUnutil());
+		System.out.println(data.getInvoiceNumber("ABD0010114").gettransDate());
 		
 		System.out.println(avalInvoiceAmt);
 		//System.out.println(AmtUnutil);
