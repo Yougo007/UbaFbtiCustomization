@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+
 public class Validator {
 	
 	public Validator() {}
@@ -210,4 +211,26 @@ public class Validator {
 		return null;
 	}
 	
+	public boolean InsertCleanPaymentInvoice(String subProdId, String invoiceId, double invoiceAmt, double amtUnUtil) throws SQLException {
+		conn = connector.getDatabaseConnection();
+		DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
+		LocalDateTime datenow = LocalDateTime.now();
+		String TransDate = dateformat.format(datenow);
+		String query = "INSERT INTO TBL_CLEANPAYTRANS VALUES (?, ?, ?, ?, ?)";
+		System.out.println("\nExecuting query: " + query);
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, subProdId);
+		ps.setString(2, invoiceId);
+		ps.setDouble(3, invoiceAmt);
+		ps.setDouble(3, amtUnUtil);
+		ps.setString(5,TransDate);
+		int i = ps.executeUpdate();
+		
+		if(i ==1)
+		{
+			return true;
+		}		 
+		return false;
+		
+	}
 }
