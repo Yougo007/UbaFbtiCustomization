@@ -31,10 +31,8 @@ public class Test {
 			System.out.println(e);
 			*/
 					//System.out.println(data.getCbnLimit("cAAA"));
-		double InvoiceAmt = data.getInvoiceNumber("AB00124BC").getInvoiceAmt();
-		double AmtUnutil = data.getInvoiceNumber("AB00124BC").getTranAmt();
-		
-		double avalInvoiceAmt = InvoiceAmt - AmtUnutil;
+		//double InvoiceAmt = data.getInvoiceNumber("AB00124BC").getInvoiceAmt();
+		//double AmtUnutil = data.getInvoiceNumber("AB00124BC").getTranAmt();
 		
 		System.out.println(data.getInvoiceNumber("AB00124BC").getId());
 		System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceId());

@@ -274,8 +274,7 @@ public class Validator {
 		
 		ps.close();
 		
-		conn.close();
-		
+		conn.close();		
 		return false;
 	}
 }
