@@ -195,8 +195,6 @@ public class Validator {
 		conn.close();
 		
 		return refnum;
-		
-	
 	}
 	
 	//Gets the Clean Payment invoice passed by FBTI

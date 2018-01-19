@@ -8,7 +8,7 @@ public class Test {
 		Validator data = new Validator();
 		//Get payment invoice
 		
-		try {
+		/*try {
 			String testInv = "AB00124BC";
 			String strInvoiceNum = data.getInvoiceNumber(testInv).getInvoiceId();
 			
@@ -29,23 +29,20 @@ public class Test {
 		
 		catch(NullPointerException e) {
 			System.out.println(e);
-		}		
-		
-		//System.out.println(data.getCbnLimit("cAAA"));
-		/*double InvoiceAmt = data.getInvoiceNumber("ABD0010114").getInvoiceAmt();
-		double AmtUnutil = data.getInvoiceNumber("ABD0010114").getAmtUnutil();
+			*/
+					//System.out.println(data.getCbnLimit("cAAA"));
+		double InvoiceAmt = data.getInvoiceNumber("AB00124BC").getInvoiceAmt();
+		double AmtUnutil = data.getInvoiceNumber("AB00124BC").getTranAmt();
 		
 		double avalInvoiceAmt = InvoiceAmt - AmtUnutil;
 		
-		System.out.println(data.getInvoiceNumber("ABD0010114").getId());
-		System.out.println(data.getInvoiceNumber("ABD0010114").getInvoiceId());
-		System.out.println(data.getInvoiceNumber("ABD0010114").getInvoiceAmt());
-		System.out.println(data.getInvoiceNumber("ABD0010114").getAmtUnutil());
-		System.out.println(data.getInvoiceNumber("ABD0010114").gettransDate());
-	*/	
+		System.out.println(data.getInvoiceNumber("AB00124BC").getId());
+		System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceId());
+		System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceAmt());
+		System.out.println(data.getInvoiceNumber("AB00124BC").getTranAmt());
+		
 		////String test = "AB00124BC";
 		//System.out.println(data.UpdateCleanPaymentInvoice(24000, test));
-	
+	}			
 	    
 	}
-}
