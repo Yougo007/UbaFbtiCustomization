@@ -67,17 +67,17 @@ public class Validator {
 			
 			if(nextref!=null &&!nextref.isEmpty())
 			{
-				String ID = null;
+				//String ID = null;
 				DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("DD-MMM-YYYY");
 				LocalDateTime datenow = LocalDateTime.now();
 				String date = dateformat.format(datenow);
 				
 				//Inserting generated reference
-				String insertnewref = "INSERT INTO TBL_ILCREF VALUES(?,?,?,?,?)";
+				String insertnewref = "INSERT INTO TBL_ILCREF VALUES(?,?,?,?)";
 				System.out.println("\nExecuting query: " + query);
 				PreparedStatement ps = conn.prepareStatement(insertnewref);
 				System.out.println(date);
-				ps.setString(1, ID);
+				//ps.setString(1, ID);
 				ps.setString(2, nextref);
 				ps.setString(3, date);
 				ps.setString(4, ProductID);
@@ -270,11 +270,32 @@ public class Validator {
 			System.out.println("Successfully Updated");
 			
 			return true;
-		}	
-		
+		}		
 		ps.close();
 		
 		conn.close();		
 		return false;
+	}
+	
+	//Validates Behalf of Branch
+	public boolean checkBehalfOfBranch(String mbeCode) throws SQLException {
+		conn = connector.getDatabaseConnection();
+		String query = "SELECT MBE_CODE FROM TBL_BOBRANCH WHERE  MBE_CODE = ?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, mbeCode);
+
+		int i = ps.executeUpdate();
+		
+		if(i ==1)
+		{
+			return true;
+		}	
+		
+		else {
+			return false;
+		}
+	
+		
+
 	}
 }

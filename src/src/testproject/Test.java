@@ -6,6 +6,23 @@ public class Test {
 	
 	public static void main(String[] args) throws Exception {
 		Validator data = new Validator();
+		
+		String mbecode = "CAM";
+		
+		if(data.checkBehalfOfBranch(mbecode)) {
+			//System.out.println("MBE code exist...coolies");
+			//Print warning to screen
+		}
+		
+		else {
+			//Call reference generator method if false
+			System.out.println("Not existing!!!");
+			//Do not call reference generator method if true
+			String ProductID = "001" ;
+			String Mbecod = "002";		
+			System.out.println(data.referenceGenerator(ProductID, Mbecod));
+		}
+		
 		//Get payment invoice
 		
 		/*try {
@@ -34,13 +51,15 @@ public class Test {
 		//double InvoiceAmt = data.getInvoiceNumber("AB00124BC").getInvoiceAmt();
 		//double AmtUnutil = data.getInvoiceNumber("AB00124BC").getTranAmt();
 		
-		System.out.println(data.getInvoiceNumber("AB00124BC").getId());
-		System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceId());
-		System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceAmt());
-		System.out.println(data.getInvoiceNumber("AB00124BC").getTranAmt());
+		//System.out.println(data.getInvoiceNumber("AB00124BC").getId());
+		//System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceId());
+		//System.out.println(data.getInvoiceNumber("AB00124BC").getInvoiceAmt());
+		//System.out.println(data.getInvoiceNumber("AB00124BC").getTranAmt());
 		
 		////String test = "AB00124BC";
 		//System.out.println(data.UpdateCleanPaymentInvoice(24000, test));
+		
+		
 	}			
 	    
 	}
